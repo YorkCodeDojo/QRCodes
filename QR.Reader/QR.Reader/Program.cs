@@ -3,20 +3,13 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
 using var image = Image.Load<Rgba32>("/Users/davidbetteridge/Personal/QRCodes/dojo.png");
-
-Console.WriteLine(image.Width);
-Console.WriteLine(image.Height);
-
-// 730
-// 732
-// 25
-var squareWidth = 8; //(image.Width) / 35;
-var squareHeight = 8; //(image.Height) / 35;
-
 using var file = File.CreateText("/Users/davidbetteridge/Personal/QRCodes/raw.txt");
 
-var rows = image.Width / 8;
-var cols = image.Height / 8;
+const int squareWidth = 8;
+const int squareHeight = 8;
+
+var rows = image.Width / squareWidth;
+var cols = image.Height / squareHeight;
 var grid = new bool[cols, rows];
 
 var version = (rows - 17) / 4;
@@ -41,7 +34,7 @@ for (int y = 0; y < image.Height; y += squareHeight)
         grid[columnNumber, rowNumber] = image[x, y].B != 255;
         columnNumber++;
     }
-
+    file.WriteLine();
     Console.WriteLine();
     rowNumber++;
 }
