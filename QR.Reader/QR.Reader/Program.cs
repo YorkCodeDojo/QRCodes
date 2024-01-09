@@ -61,7 +61,7 @@ Console.WriteLine(mask);
 var reader = new GridReader(grid, Mask6);
 
 Console.Write("Encoding: ");
-Console.WriteLine(reader.ReadNibbleNorth(cols - 1, rows - 1));
+Console.WriteLine(reader.ReadNibbleUp(cols - 1, rows - 1));
 
 Console.Write("Length: ");
 Console.WriteLine(reader.ReadByteUp(cols - 1, rows - 3));
