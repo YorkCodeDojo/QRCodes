@@ -17,20 +17,32 @@ Work out the version of the QR code using this formula:
 `version = (width - 17) / 4`
 
 ## Step 3 - Format Information
-The format information can be found in the line below the top left positioning marker.
+Under the top left positioning marker, is a line of white modules.  This is called the quiet zone.
+The line under this line contains the format information.  
+It contains 2 bits for the error correction level and then 3 bits for the mask.
+
 Process is:
-* Read the first 5 modules from the line
+* Read the first 5 (bits) modules from the line
 * Black means 1 and white means 0.  (ie.  Black Black White White White is 11000)
-* XOR the value with .....
+* XOR the value with 10101 (called the format mask)
 * The last 3 bits gives us the Id of the mask we need to apply.
 
-EXPLAIN THE MASK HERE
+The mask is required to prevent the QR reader getting confused by the message.  For example the text
+of the message could end up adding a 4th positioning marker.
+
+![masks.png](masks.png)
+
+
+
 
 ## Step 4 - Read the encoding information
 The 2x2 in the bottom right hand corner contains the encoding used in this QR code.
 The bits should be read in the following order:
+
 43
+
 21
+
 When reading the bits,  don't forget to invert any modules as specified by your mask.
 Look up the encoding from the table below.
 
