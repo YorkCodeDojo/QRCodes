@@ -30,25 +30,43 @@ Process is:
 The mask is required to prevent the QR reader getting confused by the message.  For example the text
 of the message could end up adding a 4th positioning marker.
 
+The 8 possible masks are shown below.
+
 ![masks.png](masks.png)
 
+
+For example, if your mask id was 001, then the mask would be defined by `row % 2 == 0`.  
+This means that any data bits in any even rows would be inverted.
 
 
 
 ## Step 4 - Read the encoding information
 The 2x2 in the bottom right hand corner contains the encoding used in this QR code.
-The bits should be read in the following order:
+The bits should be read in the following zig-zag order:
+```
+4 3
+2 1
+```
 
-43
-
-21
 
 When reading the bits,  don't forget to invert any modules as specified by your mask.
+
 Look up the encoding from the table below.
 
-ADD TABLE
 
-(Hint:  You should get Byte)
+| Indicator | Meaning                                                                       |
+|-----------|-------------------------------------------------------------------------------|
+| 0001      | 	Numeric encoding (10 bits per 3 digits)                                      | 
+| 0010	     | Alphanumeric encoding (11 bits per 2 characters)                              | 
+| 0100      | 	Byte encoding (8 bits per character)                                         | 
+| 1000      | 	Kanji encoding (13 bits per character)                                       | 
+| 0011      | 	Structured append (used to split a message across multiple QR symbols)       | 
+| 0111      | 	Extended Channel Interpretation (select alternate character set or encoding) | 
+| 0101      | 	FNC1 in first position (see Code 128 for more information)                   | 
+| 1001      | 	FNC1 in second position                                                      | 
+| 0000      | 	End of message (Terminator)                                                  | 
+
+(Hint:  You should get Byte encoding)
 
 
 ## Step 5 - Read the length
