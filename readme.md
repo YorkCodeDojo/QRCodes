@@ -37,7 +37,15 @@ The 8 possible masks are shown below.
 
 
 For example, if your mask id was 001, then the mask would be defined by `row % 2 == 0`.  
-This means that any data bits in any even rows would be inverted.
+This means that any data bits in any even numbered rows would be inverted.
+
+For example
+
+```
+Row 2  :    0010           1101
+Row 3  :    1010     --->  1010
+Row 4  :    1111           0000
+```
 
 
 
