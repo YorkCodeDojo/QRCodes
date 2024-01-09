@@ -4,10 +4,11 @@
 The three big squares (top left,  top right and bottom left) are for positioning the QR code.
 To make our life easier we are going ignore these,  as our image is already correctly orientated.
 
+![position.png](position.png)
 
 ## Step 1 - Read Image
 Convert the `dojo.png` into a grid of black and white modules.
-Each module is 8x8 pixels.
+Each module is 8x8 pixels.  A module will represent '1 bit' of data.
 
 If you want to skip this step,  then the file `raw.txt` can be used.
 
