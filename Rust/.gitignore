@@ -1,0 +1,6 @@
+debug/
+target/
+scenes/
+Cargo.lock
+**/*.rs.bk
+*.pdb
